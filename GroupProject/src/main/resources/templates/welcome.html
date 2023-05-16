@@ -1,0 +1,110 @@
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title> fat cat </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+
+<body>
+
+<div class="container">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        AppName
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Chat</a>
+            </li>
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0 mr-3 mx-5">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        </form>
+    </div>
+    <div class="mx-5">
+        <a th:href="@{'login-section'}" class="btn btn-primary mx-2" > Login </a>
+        <a th:href="@{/signup}" class="btn btn-primary mx-1" > Sign Up </a>
+    </div>
+</nav>
+
+</div>
+
+<section class="login-section">
+<div class="container mx-auto row justify-content-center">
+    <div id="loginbox" style="margin-top: 100px;" class="col-md-3  col-sm-6 ">
+        <div class="card border-info">
+            <div class="card-header bg-info">
+                Sign In
+            </div>
+
+            <div class="card-body">
+                <div class="card-text">
+
+                    <!-- Login Form -->
+                    <form action="#" th:action="@{/authenticateTheUser}"  method="POST" class="form-horizontal">
+
+                        <!-- Place for messages: error, alert etc ... -->
+                        <div class="form-group">
+                            <div class="col-xs-15">
+                                <div>
+<!--                                    &lt;!&ndash; Check for login error &ndash;&gt;-->
+
+<!--                                    <div th:if="${param.error}">-->
+<!--                                        <div class="alert alert-danger col-xs-offset-1 col-xs-10">-->
+<!--                                            Invalid username and password.-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+<!--                                    &lt;!&ndash; Check for logout &ndash;&gt;-->
+
+<!--                                    <div th:if="${param.logout}">-->
+<!--                                        <div class="alert alert-success col-xs-offset-1 col-xs-10">-->
+<!--                                             You have been logged out.-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- User name -->
+                        <div style="margin-bottom: 25px;" class="input-group">
+                            <input type="text" name="username" placeholder="username" class="form-control" />
+                        </div>
+
+                        <!-- Password -->
+                        <div style="margin-bottom: 25px;" class="input-group">
+                            <input type="password" name="password" placeholder="password" class="form-control" />
+                        </div>
+
+                        <!-- Login/Submit Button -->
+                        <div style="margin-top: 10px;" class="form-group">
+                            <div class="col-sm-6 controls">
+                                <button type="submit" class="btn btn-success">Login</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+</body>
+</html>
