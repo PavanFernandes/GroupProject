@@ -1,4 +1,4 @@
-package com.FatCat.entity.project;
+package com.FatCat.entity;
 
 import jakarta.persistence.*;
 
@@ -11,7 +11,7 @@ public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "tag_id")
     private int id;
 
     @Column(name = "name")
@@ -28,11 +28,27 @@ public class Tag {
     )
     private List<Project> projects = new ArrayList<>();
 
-    Tag(){
+    @ManyToMany(fetch=FetchType.EAGER,
+            cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+                    CascadeType.DETACH, CascadeType.REFRESH
+            })
+    @JoinTable(
+            name = "user_skills",
+            joinColumns=@JoinColumn(name = "tag_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<Project> users = new ArrayList<>();
+
+    public Tag(){
 
     }
 
     public Tag(String name){
+        this.name = name;
+    }
+
+    public Tag(int id, String name){
+        this.id = id;
         this.name = name;
     }
 
@@ -58,6 +74,15 @@ public class Tag {
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+
+
+    public List<Project> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<Project> users) {
+        this.users = users;
     }
 
     public void addProjects(Project project){

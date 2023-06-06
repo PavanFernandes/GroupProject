@@ -10,6 +10,55 @@
     <meta charset="UTF-8">
     <title>home</title>
 
+    <style>
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+    align:right;
+    margin-right: 20px;
+}
+.dropdown-content {
+    position: absolute;
+    background-color: lightgrey;
+    min-width: 200px;
+    display: none;
+    z-index: 1;
+    margin-right: 20px;
+}
+
+  .dropdown-content input{
+  border:none;
+  background-color: lightgrey;
+  margin: o;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover .dd-input {
+
+    background-color:orange;
+}
+
+.dropdown-content a:hover , .dropdown-content input:hover{
+    background-color: orange;
+}
+
+.dropdown:hover .dropdown-content {
+    margin-right: 30px;
+    display: block;
+}
+
+
+
+    </style>
+
+
 </head>
 <body>
 <!--//nav bar-->
@@ -48,25 +97,37 @@
         </div>
 
         <div>
-            <a class="mx-auto d-inline-block ml-auto my-0" href="#" style="text-decoration:none;">
-                <div class="d-inline-block">
-                    <img alt="" class="d-inline-block align-top rounded-circle" height="35"
-                         src="https://xsgames.co/randomusers/avatar.php?g=female" width="35">
+            <div class="dropdown">
+
+                <a class="mx-auto d-inline-block ml-auto my-0 " href="#" style="text-decoration:none;">
+
+                    <div class="d-inline-block ">
+                        <img alt="" class="d-inline-block align-top rounded-circle" height="35"
+                             src="https://xsgames.co/randomusers/avatar.php?g=female" width="35">
+                    </div>
+                    <div class="d-inline-block ml-2 mb-0" style="color:grey;">
+                        <span sec:authentication="principal.username" style="position:relative; top:5px;"> </span>
+                    </div>
+                </a>
+
+                <div class="dropdown-content">
+                    <a href="history.html">My Account</a>
+                    <a href="profile.html">Profiles</a>
+                    <a href="login.html">Projects</a>
+                    <a href="settings.html">App Setting</a>
+                    <a>
+                        <form action="#" method="POST" th:action="@{/logout}">
+                            <input class="dd-input" type="submit" value="Log Out">
+                        </form>
+                    </a>
+
                 </div>
-                <div class="d-inline-block ml-2 mb-0" style="color:grey;">
-                    <span sec:authentication="principal.username" style="position:relative; top:5px;"> </span>
-                </div>
-            </a>
+            </div>
         </div>
     </nav>
 </div>
 <br>
 
-<div style="display: flex; justify-content:end; margin-right:20px">
-    <form action="#" method="POST" th:action="@{/logout}">
-        <input type="submit" value="Logout">
-    </form>
-</div>
 <br>
 
 <!-- search, filter, tags  -->
@@ -106,9 +167,9 @@
         <div class="card-body">
             <a th:href="@{/home/project/{title} (title = ${project.title})}">
                 <h5 class="card-title" style="text-align:left" th:text="${project.title}"></h5>
-            </a>
+            </a>    -p
             <p class="card-text" style="text-align:left; color: rgba(0, 0, 0, 0.8);"
-               th:text="${project.description}"></p>
+               th:text="${project.shortDescription}"></p>
         </div>
         <div class="card-footer text-muted" style="text-align:left;">
             <small th:text="${project.timeStamp}"></small>

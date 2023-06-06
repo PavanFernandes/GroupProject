@@ -1,16 +1,15 @@
 package com.FatCat.controller;
 
 import com.FatCat.GroupProjectApplication;
-import com.FatCat.dao.ProjectDaoServiceImpl;
-import com.FatCat.entity.project.Project;
-import com.FatCat.entity.project.Tag;
-import com.FatCat.repositoryService.ProjectRepository;
+import com.FatCat.entity.Project;
+import com.FatCat.entity.Tag;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.FatCat.GroupProjectApplication.theTagRepository;
 import static com.FatCat.GroupProjectApplication.theprojectRepository;
 
 @Controller
@@ -30,7 +29,7 @@ public class RestController {
 
         model.addAttribute("projects", projects);
 
-        List<Tag> tags = GroupProjectApplication.theTagRepository.findAll();
+        List<Tag> tags = theTagRepository.findAll();
 
         model.addAttribute("tags", tags);
 
@@ -38,14 +37,7 @@ public class RestController {
 
     }
 
-    @GetMapping("/home/project/{title}")
-    public String processProjectData(@PathVariable String title, Model model) {
 
-        Project project = theprojectRepository.findByTitle(title);
-
-        model.addAttribute("project", project);
-        return "project-details";
-    }
 
     @GetMapping("/chat")
     public String addNewProject(){

@@ -1,6 +1,6 @@
 package com.FatCat.repositoryService;
 
-import com.FatCat.entity.project.Project;
+import com.FatCat.entity.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

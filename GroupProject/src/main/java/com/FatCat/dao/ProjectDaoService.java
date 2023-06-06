@@ -1,6 +1,6 @@
 package com.FatCat.dao;
 
-import com.FatCat.entity.project.Project;
+import com.FatCat.entity.Project;
 
 import java.util.List;
 

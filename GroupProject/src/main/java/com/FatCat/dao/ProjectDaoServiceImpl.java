@@ -1,6 +1,6 @@
 package com.FatCat.dao;
 
-import com.FatCat.entity.project.Project;
+import com.FatCat.entity.Project;
 import com.FatCat.repositoryService.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

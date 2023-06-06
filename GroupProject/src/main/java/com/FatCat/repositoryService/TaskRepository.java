@@ -1,8 +1,10 @@
 package com.FatCat.repositoryService;
 
-import com.FatCat.entity.Tag;
+import com.FatCat.entity.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TagRepository extends JpaRepository<Tag, Integer> {
+public interface TaskRepository extends JpaRepository<Task, Integer> {
+
+
 
 }
