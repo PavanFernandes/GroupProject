@@ -31,7 +31,6 @@ public class RegisterRestController {
             user.setRole("ROLE_STUDENT");
             user.setPassword("{noop}" + user.getPassword());
             GroupProjectApplication.theUserRepository.save(user);
-            System.out.println(user.getUsername());
         }
 
         model.addAttribute("user", user);

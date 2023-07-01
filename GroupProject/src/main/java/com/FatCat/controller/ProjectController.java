@@ -1,7 +1,5 @@
 package com.FatCat.controller;
 
-
-import com.FatCat.dao.TaskDaoImpl;
 import com.FatCat.entity.Project;
 import com.FatCat.entity.Tag;
 import com.FatCat.entity.Task;
@@ -9,20 +7,15 @@ import com.FatCat.entity.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.FatCat.GroupProjectApplication.*;
-import static com.FatCat.controller.RestController.home;
 
 @Controller
 public class ProjectController {
-
 
     @GetMapping("/new/project")
     public String addNewProject(Model model){
@@ -38,15 +31,8 @@ public class ProjectController {
                               Model model, Authentication authentication){
 
             project.setTimeStamp(LocalDateTime.now());
-
             User user = theUserRepository.findByUsername(authentication.getName());
-            user.getProjects().add(project);
-            theUserRepository.save(user);
-
-//            project.getMembers().add(user);
-//            System.out.println(user.getUsername());
-//            System.out.println(project.toString());
-//            theprojectRepository.save(project);
+            theUserDao.SaveProject(user.getId() , project);
 
               return "redirect:/";
     }
@@ -55,7 +41,7 @@ public class ProjectController {
     public String processProjectData(@PathVariable String title, Model model) {
 
         Project project = theprojectRepository.findByTitle(title);
-        List<Task> tasks = TaskDaoImpl.findAllByProject(project.getId());
+        List<Task> tasks = theUserDao.findAllByProject(project.getId());
         model.addAttribute("tasks", tasks);
         model.addAttribute("project", project);
         model.addAttribute("task", new Task());
@@ -73,6 +59,38 @@ public class ProjectController {
         theprojectRepository.save(project);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/home/{username}/myProjects")
+    public String showMyProjects(@PathVariable String username, Model model){
+
+        User user = theUserRepository.findByUsername(username);
+        List<Project> projects = user.getProjects();
+        model.addAttribute("projects", projects);
+
+        return "myprojects";
+    }
+
+    @GetMapping("/delete/projects/{projectId}")
+    public String deleteProject(@PathVariable int projectId, Model model, Authentication authentication){
+
+        Project project = theprojectRepository.findById(projectId).get();
+
+
+        User user = theUserRepository.findByUsername(authentication.getName());
+
+            project.getMembers().forEach(u-> u.getProjects().remove(project));
+            project.getTags().forEach(t-> t.getProjects().remove(project));
+
+            project.removeMember(user);
+            project.getTags().clear();
+
+//        user.getProjects().remove(project);
+            theprojectRepository.save(project);
+            theprojectRepository.delete(project);
+
+
+        return "redirect:/home/" + authentication.getName() + "/myProjects";
     }
 
 }

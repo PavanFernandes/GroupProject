@@ -3,14 +3,14 @@ package com.FatCat.controller;
 import com.FatCat.GroupProjectApplication;
 import com.FatCat.entity.Project;
 import com.FatCat.entity.Tag;
+import com.FatCat.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.FatCat.GroupProjectApplication.theTagRepository;
-import static com.FatCat.GroupProjectApplication.theprojectRepository;
+import static com.FatCat.GroupProjectApplication.*;
 
 @Controller
 public class RestController {

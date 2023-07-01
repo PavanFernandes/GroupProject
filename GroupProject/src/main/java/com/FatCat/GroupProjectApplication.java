@@ -1,18 +1,16 @@
 package com.FatCat;
 
+import com.FatCat.dao.UserDao;
 import com.FatCat.repositoryService.TagRepository;
 import com.FatCat.repositoryService.TaskRepository;
 import com.FatCat.repositoryService.UserRepository;
 import com.FatCat.repositoryService.ProjectRepository;
-import com.FatCat.entity.Project;
 import com.FatCat.entity.Tag;
-import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.List;
-import java.util.Optional;
+
 
 @SpringBootApplication
 public class GroupProjectApplication {
@@ -29,18 +27,19 @@ public class GroupProjectApplication {
 	public static TaskRepository theTaskRepository;
 	public static TagRepository theTagRepository;
 	public static UserRepository theUserRepository;
-	public static EntityManager theEntityManager;
+	public static UserDao theUserDao;
 
 
 	@Autowired
 	GroupProjectApplication(ProjectRepository projectRepository, TagRepository tagRepository,
-							TaskRepository taskRepository, UserRepository userRepository, EntityManager entityManager){
+							TaskRepository taskRepository, UserRepository userRepository,
+							UserDao userDao){
 
          theprojectRepository = projectRepository;
 		 theTaskRepository = taskRepository;
 		 theTagRepository = tagRepository;
 		 theUserRepository = userRepository;
-		 theEntityManager = entityManager;
+		 theUserDao = userDao;
 	}
 
 

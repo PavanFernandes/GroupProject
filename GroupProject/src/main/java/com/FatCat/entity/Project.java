@@ -6,8 +6,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.FatCat.GroupProjectApplication.theEntityManager;
-
 @Entity
 @Table(name = "project")
 public class Project {
@@ -77,7 +75,7 @@ public class Project {
         this.title = title;
     }
 
-    public List getTags() {
+    public List<Tag> getTags() {
         return this.tags;
     }
 
@@ -146,6 +144,14 @@ public class Project {
 
     public void setMembers(List<User> members) {
         this.members = members;
+    }
+
+    public boolean removeMember(User user){
+        if(this.members.remove(user)){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public List<Task> getTasks() {
